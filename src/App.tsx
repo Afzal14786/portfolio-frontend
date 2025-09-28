@@ -4,6 +4,7 @@ import Skills from "./Pages/Skills"
 import MyJourney from "./Pages/MyJourney"
 import ProjectPage from './Pages/ProjectPage'
 import BlogPage from './Pages/BlogPage'
+import ConnectPage from "./Pages/ConnectPage"
 
 function App() {
 
@@ -14,6 +15,7 @@ function App() {
       <MyJourney/>
       <ProjectPage/>
       <BlogPage/>
+      <ConnectPage/>
     </>
   )
 }
