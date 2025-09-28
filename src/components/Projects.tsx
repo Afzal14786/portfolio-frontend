@@ -72,15 +72,7 @@ const Projects: React.FC = () => {
       "
     >
       <h2
-        className="
-          text-3xl sm:text-5xl font-extrabold mb-4 text-transparent
-          bg-clip-text
-          bg-gradient-to-r from-pink-400 via-purple-500 to-indigo-600
-          drop-shadow-lg
-          text-center
-          select-none
-        "
-      >
+        className="text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-green-500 mb-3 text-center">
         Projects
       </h2>
 
