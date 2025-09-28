@@ -1,11 +1,11 @@
-import {
-  FaGithub,
-  FaInstagram,
-  FaTwitter,
-  FaFacebook,
-  FaLaptopCode,
-  FaBlog,
-} from "react-icons/fa";
+import github from "/src/assets/github-2.png";
+import instagram from "/src/assets/instagram.png";
+import twitter from "/src/assets/twitter.png";
+import facebook from "/src/assets/facebook.png";
+import leetcode from "/src/assets/leetcode.png";
+import linkedin from "/src/assets/linkedin.png";
+import project from "/src/assets/project.png";
+import blog from "/src/assets/blog.png";
 
 const HomeSection = () => {
   return (
@@ -27,49 +27,82 @@ const HomeSection = () => {
 
           {/* Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 mb-6 justify-center md:justify-start">
-            <button className="flex items-center gap-2 bg-cyan-600 text-white px-5 py-2 rounded-lg hover:bg-cyan-700 transition shadow shadow-cyan-500/50">
-              <FaLaptopCode />
+            <a
+              href="#projects-section"
+              className="flex items-center gap-2 bg-cyan-600 text-white px-5 py-2 rounded-lg hover:bg-cyan-700 transition shadow shadow-cyan-500/50"
+            >
+              <img src={project} alt="Projects" className="w-5 h-5 filter invert" />
               View Projects
-            </button>
+            </a>
+            
             <button className="flex items-center gap-2 border border-cyan-400 text-cyan-400 px-5 py-2 rounded-lg hover:bg-cyan-600 hover:text-white transition shadow shadow-cyan-500/20">
-              <FaBlog />
+              <img src={blog} alt="Blog" className="w-5 h-5" />
               My Blog Page
             </button>
           </div>
 
-          {/* Social Media Icons */}
+          
           <div className="flex gap-4 justify-center md:justify-start mt-4">
+            {/* GitHub */}
             <a
               href="https://github.com/afzal14786"
               target="_blank"
               rel="noreferrer"
-              className="w-10 h-10 rounded-full bg-cyan-600 text-white hover:scale-105 transform transition flex items-center justify-center shadow-md"
+              className="hover:scale-110 transform transition
+              bg-gray-700 rounded-full
+              " 
             >
-              <FaGithub />
+              <img src={github} alt="GitHub" className="w-8 h-8 hover:opacity-80 transition" />
             </a>
+            
+            {/* LinkedIn */}
+            <a
+              href="https://linkedin.com/in/mdafzal14786"
+              target="_blank"
+              rel="noreferrer"
+              className="hover:scale-110 transform transition"
+            >
+              <img src={linkedin} alt="LinkedIn" className="w-8 h-8 hover:opacity-80 transition" />
+            </a>
+
+            {/* LeetCode */}
+            <a
+              href="https://leetcode.com/ansari_afzal"
+              target="_blank"
+              rel="noreferrer"
+              className="hover:scale-110 transform transition"
+            >
+              <img src={leetcode} alt="LeetCode" className="w-8 h-8 hover:opacity-80 transition" />
+            </a>
+
+            {/* Instagram */}
             <a
               href="https://instagram.com/mdafzal14786"
               target="_blank"
               rel="noreferrer"
-              className="w-10 h-10 rounded-full bg-pink-600 text-white hover:scale-105 transform transition flex items-center justify-center shadow-md"
+              className="hover:scale-110 transform transition"
             >
-              <FaInstagram />
+              <img src={instagram} alt="Instagram" className="w-8 h-8 hover:opacity-80 transition" />
             </a>
+            
+            {/* Twitter */}
             <a
               href="https://twitter.com/mdafzal14786"
               target="_blank"
               rel="noreferrer"
-              className="w-10 h-10 rounded-full bg-blue-500 text-white hover:scale-105 transform transition flex items-center justify-center shadow-md"
+              className="hover:scale-110 transform transition"
             >
-              <FaTwitter />
+              <img src={twitter} alt="Twitter" className="w-8 h-8 hover:opacity-80 transition" />
             </a>
+
+            {/* Facebook */}
             <a
               href="https://facebook.com/mdafzal14786"
               target="_blank"
               rel="noreferrer"
-              className="w-10 h-10 rounded-full bg-indigo-600 text-white hover:scale-105 transform transition flex items-center justify-center shadow-md"
+              className="hover:scale-110 transform transition"
             >
-              <FaFacebook />
+              <img src={facebook} alt="Facebook" className="w-8 h-8 hover:opacity-80 transition" />
             </a>
           </div>
         </div>

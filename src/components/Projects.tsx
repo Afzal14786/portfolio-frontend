@@ -65,6 +65,7 @@ const initialProjectData: ProjectEntry[] = [
 const Projects: React.FC = () => {
   return (
     <section
+      id="projects-section"
       className="
         px-4 sm:px-12 py-10 
         bg-gradient-to-b from-[#0b132b] via-[#1c2541] to-[#3a506b] 

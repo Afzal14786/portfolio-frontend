@@ -1,12 +1,22 @@
 import React from 'react';
-import { Github, Coffee, Twitter, Facebook, Instagram, Code } from 'lucide-react';
+import { Github, Coffee } from 'lucide-react'; 
 
+// Import your custom images
+import github from "/src/assets/github-2.png";
+import instagram from "/src/assets/instagram.png";
+import twitter from "/src/assets/twitter.png";
+import facebook from "/src/assets/facebook.png";
+import leetcode from "/src/assets/leetcode.png";
+import linkedin from "/src/assets/linkedin.png";
+
+// Social media links array using image paths
 const socialLinks = [
-  { name: 'Github', Icon: Github, href: '#github' },
-  { name: 'Instagram', Icon: Instagram, href: '#instagram' },
-  { name: 'Twitter', Icon: Twitter, href: '#twitter' },
-  { name: 'Facebook', Icon: Facebook, href: '#facebook' },
-  { name: 'Leetcode', Icon: Code, href: '#leetcode' },
+  { name: 'GitHub', image: github, href: 'https://github.com/afzal14786' },
+  { name: 'LinkedIn', image: linkedin, href: 'https://linkedin.com/in/yourprofile'},
+  { name: 'Leetcode', image: leetcode, href: 'https://leetcode.com/yourprofile' },
+  { name: 'Instagram', image: instagram, href: 'https://instagram.com/mdafzal14786'},
+  { name: 'Twitter', image: twitter, href: 'https://twitter.com/mdafzal14786'},
+  { name: 'Facebook', image: facebook, href: 'https://facebook.com/mdafzal14786'},
 ];
 
 const Connect: React.FC = () => {
@@ -35,7 +45,7 @@ const Connect: React.FC = () => {
           discussing new opportunities and innovative ideas.
         </p>
 
-        {/* Action Buttons Container */}
+        {/* Action Buttons Container (Lucide icons for primary actions) */}
         <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mt-8">
           
           <a
@@ -77,7 +87,7 @@ const Connect: React.FC = () => {
       {/* Separator Line */}
       <div className="mt-16 mb-8 border-t border-gray-700 max-w-2xl mx-auto"></div>
 
-      {/* Social Media Icons */}
+      {/* Social Media Icons (Using custom images and circular hover effect) */}
       <div className="flex justify-center items-center space-x-6">
         {socialLinks.map((link) => (
           <a
@@ -86,13 +96,22 @@ const Connect: React.FC = () => {
             aria-label={link.name}
             target="_blank"
             rel="noopener noreferrer"
-            className="
-              text-gray-400 hover:text-teal-400 transition-colors duration-300
-              p-2 rounded-full border border-transparent hover:border-teal-400
-              transform hover:scale-110
-            "
+            // The 'a' tag creates the circular, transparent, hoverable area
+            className={`
+              w-12 h-12 // Fixed size for the clickable area
+              flex items-center justify-center // Center the image
+              rounded-full // Make the hover border circular
+              border border-transparent 
+              hover:border-teal-400 // Border appears on hover
+              transform hover:scale-110 
+              transition duration-300 ease-in-out
+            `}
           >
-            <link.Icon className="w-6 h-6 sm:w-8 sm:h-8" />
+            <img 
+                src={link.image} 
+                alt={`${link.name} Icon`} 
+                className="w-8 h-8 sm:w-10 sm:h-10" 
+            />
           </a>
         ))}
       </div>
