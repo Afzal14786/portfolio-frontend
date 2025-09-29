@@ -17,6 +17,13 @@ This is the official personal website for Afzal **(me)**, a tech enthusiast and 
 | :---: | :---: |
 | <img src="./docs/iamafzal-desktop-view.png" alt="Full page view on a desktop monitor" width="400"/> | <img src="./docs/mobile-view.png" alt="Hero section view on a mobile device" width="200"/> |
 
+  
+## Also This Portfolio Contain A Blog Section Where All The Blogs User Can Read  
+![Latest Blogs](./docs/latestBlogs.png)
+![All Blogs](./docs/allBlogs.png)
+![Read Blog 1](./docs/readBlog1.png)
+![Read Blog 2](./docs/readBlog2.png)  
+
 ---
 
 ## 🚀 Live Demo

@@ -1,15 +1,12 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import type { MouseEvent, ReactElement } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { sampleBlogs } from "../data/data.ts";
 import type { Blog } from "../types/Blog";
 import profileImage from "../assets/profileImage.jpeg"; 
-import { toast } from 'react-toastify';
+// import { toast } from 'react-toastify'; // Not needed anymore
 
-// importing images
-import twitter from '../assets/twitter.png'; 
-import facebook from '../assets/facebook.png'; 
-import linkedin from '../assets/linkedin.png'; 
+// Share image imports are removed
 
 // --- TYPE DEFINITIONS ---
 
@@ -27,12 +24,7 @@ interface ActionButtonProps {
     buttonClassName?: string;
 }
 
-interface SharePopoverProps {
-    blogTitle: string;
-    isVisible: boolean;
-    onClose: () => void;
-    positionClass?: string;
-}
+// SharePopoverProps and ShareOption interface are removed
 
 // --- CONSTANTS & UTILITIES ---
 
@@ -67,84 +59,12 @@ const ActionButton: React.FC<ActionButtonProps> = ({ icon, label, count, onClick
     </div>
 );
 
-const SharePopover: React.FC<SharePopoverProps> = ({ blogTitle, isVisible, onClose, positionClass = '' }) => {
-    const pageUrl = encodeURIComponent(window.location.href);
-    const title = encodeURIComponent(blogTitle);
-    const popoverRef = useRef<HTMLDivElement>(null);
+// SharePopover component is completely removed
 
-    // Logic to close popover when clicking outside
-    useEffect(() => {
-        const handleClickOutside = (event: MouseEvent | globalThis.MouseEvent) => {
-            if (popoverRef.current && !popoverRef.current.contains(event.target as Node)) {
-                onClose();
-            }
-        };
-        if (isVisible) {
-            document.addEventListener("mousedown", handleClickOutside as (e: globalThis.MouseEvent) => void);
-        }
-        return () => {
-            document.removeEventListener("mousedown", handleClickOutside as (e: globalThis.MouseEvent) => void);
-        };
-    }, [isVisible, onClose]);
-    
-    // Social share options using imported PNGs/SVGs
-    const shareOptions = [
-        { 
-            name: "Share on X (Twitter)", 
-            icon: <img src={twitter} alt="X Icon" className="w-4 h-4" />,
-            url: `https://twitter.com/intent/tweet?url=${pageUrl}&text=${title}`
-        },
-        { 
-            name: "Share on Facebook", 
-            icon: <img src={facebook} alt="Facebook Icon" className="w-4 h-4" />,
-            url: `https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`
-        },
-        { 
-            name: "Share on LinkedIn", 
-            icon: <img src={linkedin} alt="LinkedIn Icon" className="w-4 h-4" />,
-            url: `https://www.linkedin.com/shareArticle?mini=true&url=${pageUrl}&title=${title}`
-        },
-        {
-            name: "Copy link",
-            icon: (
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 text-gray-400 group-hover:text-cyan-400"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-            ),
-            onClick: () => {
-                navigator.clipboard.writeText(decodeURIComponent(pageUrl));
-                // FIX: Actual toast notification integration
-                toast.success('Link copied to clipboard!', { position: "top-center", autoClose: 2000 }); 
-                onClose();
-            }
-        }
-    ];
-
-    if (!isVisible) return null;
-
-    return (
-        <div 
-            ref={popoverRef}
-            className={`absolute w-56 rounded-lg bg-[#161b22] shadow-xl border border-gray-700 z-50 text-sm overflow-hidden ${positionClass}`}
-        >
-            {shareOptions.map((option) => (
-                <a 
-                    key={option.name} 
-                    href={option.url} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    onClick={option.onClick ? option.onClick : onClose}
-                    className="flex items-center space-x-3 p-3 transition-colors duration-150 hover:bg-gray-700/50 group"
-                >
-                    {option.icon} 
-                    <span className="text-gray-300 group-hover:text-cyan-400">{option.name}</span>
-                </a>
-            ))}
-        </div>
-    );
-};
-
+// --- MAIN COMPONENT ---
 
 const ReadBlog: React.FC = () => {
-  const { blogId, subjectSlug: _subjectSlug, titleSlug: _titleSlug } = useParams<{ 
+  const { blogId } = useParams<{ 
     blogId: string; 
     subjectSlug?: string;
     titleSlug?: string; 
@@ -156,8 +76,9 @@ const ReadBlog: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const [showSharePopoverDesktop, setShowSharePopoverDesktop] = useState(false);
-  const [showSharePopoverMobile, setShowSharePopoverMobile] = useState(false);
+  // Share popover states are removed
+  // const [showSharePopoverDesktop, setShowSharePopoverDesktop] = useState(false);
+  // const [showSharePopoverMobile, setShowSharePopoverMobile] = useState(false);
   
   const [likes, setLikes] = useState(0); 
   const [isLiked, setIsLiked] = useState(false);
@@ -175,7 +96,8 @@ const ReadBlog: React.FC = () => {
           fullContent: foundBlog.description.repeat(4) 
       }
       setBlog(fullContentBlog);
-      setLikes(100 + parseInt(blogId || '0', 10) * 5); 
+      const idNumber = parseInt(blogId || '0', 10);
+      setLikes(100 + idNumber * 5); 
     } else {
       setBlog(null);
       setError(`Blog post with ID: ${blogId} not found.`);
@@ -191,20 +113,10 @@ const ReadBlog: React.FC = () => {
     setLikes(prev => prev + (isLiked ? -1 : 1));
   };
 
-  const handleShareClickDesktop = (e: MouseEvent<HTMLButtonElement>) => {
-    e.stopPropagation(); 
-    setShowSharePopoverDesktop(prev => !prev);
-    setShowSharePopoverMobile(false);
-  };
-
-  const handleShareClickMobile = (e: MouseEvent<HTMLButtonElement>) => {
-    e.stopPropagation(); 
-    setShowSharePopoverMobile(prev => !prev);
-    setShowSharePopoverDesktop(false);
-  };
-  
-  const handleClosePopoverDesktop = () => setShowSharePopoverDesktop(false);
-  const handleClosePopoverMobile = () => setShowSharePopoverMobile(false);
+  // Share click handlers and close handlers are removed
+  // const handleShareClick = (isMobile: boolean) => (e: MouseEvent<HTMLButtonElement>) => { /* ... */ };
+  // const handleClosePopoverDesktop = () => setShowSharePopoverDesktop(false);
+  // const handleClosePopoverMobile = () => setShowSharePopoverMobile(false);
 
   // --- RENDERING SETUP ---
 
@@ -238,12 +150,7 @@ const ReadBlog: React.FC = () => {
     day: 'numeric',
   });
 
-  // Reusable share icon SVG
-  const shareIcon = (
-    <svg className="w-6 h-6 text-gray-400 hover:text-green-500" fill="currentColor" viewBox="0 0 24 24">
-        <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.45 1.25.71 2.04.71 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L7.14 9.87c-.54-.45-1.25-.71-2.04-.71-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.26 2.04-.71l7.12 4.16c-.05.23-.09.46-.09.7 0 1.66 1.34 3 3 3s3-1.34 3-3-1.34-3-3-3z"/>
-    </svg>
-  );
+  // Share icon SVG is removed
 
   // Like icon SVG
   const likeIcon = (
@@ -257,7 +164,7 @@ const ReadBlog: React.FC = () => {
   return (
     <div className="min-h-screen bg-[#0d1117] text-gray-200 relative">
         
-      {/* Fixed Sidebar for Icons (Desktop) */}
+      {/* Fixed Sidebar for Icons (Desktop) - Only includes Like Button */}
       <div className="fixed left-0 top-0 h-full hidden xl:flex items-center justify-start p-6 z-10">
           <div className="flex flex-col space-y-4 p-3 bg-[#161b22] rounded-xl shadow-2xl border border-gray-700">
               
@@ -269,21 +176,7 @@ const ReadBlog: React.FC = () => {
                   icon={likeIcon}
               />
               
-              {/* Share Button (Desktop) - Includes Popover */}
-              <div className="relative">
-                <ActionButton 
-                    label="Share" 
-                    onClick={handleShareClickDesktop}
-                    icon={shareIcon}
-                    buttonClassName="z-20"
-                />
-                <SharePopover 
-                    blogTitle={blog.title} 
-                    isVisible={showSharePopoverDesktop} 
-                    onClose={handleClosePopoverDesktop} 
-                    positionClass="left-full top-0 ml-4" 
-                />
-              </div>
+              {/* Share Button div is removed */}
           </div>
       </div>
       
@@ -347,7 +240,7 @@ const ReadBlog: React.FC = () => {
             )}
         </div>
         
-        {/* Mobile/Tablet Action Icons */}
+        {/* Mobile/Tablet Action Icons - Only includes Like Button */}
         <div className="flex justify-center space-x-6 mb-8 xl:hidden bg-[#161b22] p-4 rounded-xl border border-gray-700">
              
             {/* Like Button with Count */}
@@ -360,34 +253,15 @@ const ReadBlog: React.FC = () => {
                 className="flex-row items-center space-x-2 space-y-0"
             />
             
-            {/* Share Button (Mobile) - Includes Popover */}
-            <div className="relative">
-                <ActionButton 
-                    label="Share" 
-                    onClick={handleShareClickMobile}
-                    icon={shareIcon}
-                />
-                <SharePopover 
-                    blogTitle={blog.title} 
-                    isVisible={showSharePopoverMobile} 
-                    onClose={handleClosePopoverMobile} 
-                    positionClass="left-1/2 -translate-x-1/2 mt-2"
-                />
-            </div>
+            {/* Share Button/Popover div is removed */}
 
         </div>
 
         {/* Blog Content */}
         <div className="prose prose-xl prose-invert max-w-none text-lg leading-relaxed text-gray-300">
-            <p className="mb-6">{blog.description}</p>
-            <p className="mb-6">
-                This is the main body of the blog post. In a real application, this content would be loaded from a separate markdown or HTML file. For example, this section would dive deep into access control strategies.
-            </p>
-            <h3 className="text-2xl md:text-3xl mt-10 mb-4 font-bold border-b border-gray-800 pb-2">Key Takeaways from {blog.topic}</h3>
+            <h3 className="text-2xl md:text-3xl mt-10 mb-4 font-bold border-b border-gray-800 pb-2">{blog.title}</h3>
             <p>{blog.fullContent}</p> 
-            <p>
-                The distributed nature of modern applications demands a clear understanding of data partitioning strategies. Whether you choose Range, Hash, or Directory sharding, consistency checks and resharding mechanisms will always be the most complex operational tasks.
-            </p>
+            <br />
         </div>
         
         {/* Footer Section */}
