@@ -47,16 +47,16 @@ To get a local copy up and running, follow these simple steps.
 
 1.  **Clone the repository:**
     ```bash
-    git clone [https://github.com/Afzal14786/portfolio-frontend.git](https://github.com/Afzal14786/portfolio-frontend.git)
+    git clone https://github.com/Afzal14786/portfolio-frontend.git
     cd portfolio-frontend
     ```
 2.  **Install project dependencies:**
     ```bash
-    npm install  # or yarn install
+    npm install
     ```
 3.  **Start the development server:**
     ```bash
-    npm run dev  # or yarn dev
+    npm run dev
     ```
     The application will now be running on `http://localhost:5173`.  
 
