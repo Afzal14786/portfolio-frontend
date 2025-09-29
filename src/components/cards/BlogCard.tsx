@@ -20,11 +20,24 @@ function getRandomGradient(topic: string) {
   return topicGradients[index];
 }
 
+const slugify = (text: string): string => {
+  return text
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9\s-]/g, '')
+    .replace(/[\s-]+/g, '-') 
+    .replace(/^-+|-+$/g, ''); 
+};
+
 const BlogCard: React.FC<{ blog: Blog }> = ({ blog }) => {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate(`/blog/${blog.id}`);
+    const subjectSlug = slugify(blog.subject);
+    const titleSlug = slugify(blog.title);
+    const url = `/blog/${subjectSlug}/${titleSlug}/${blog.id}`;
+    
+    navigate(url);
   };
 
   // Keep a maximum of 250 characters and ensure the slice doesn't cut in the middle of a word unnecessarily.
@@ -32,6 +45,8 @@ const BlogCard: React.FC<{ blog: Blog }> = ({ blog }) => {
     blog.description.length > 250 ? blog.description.slice(0, 250).trim() + '...more' : blog.description;
 
   const topicGradient = getRandomGradient(blog.topic);
+  // Determine if we need to show the placeholder
+  const isPlaceholder = !blog.imageUrl; 
 
   return (
     <article
@@ -79,11 +94,34 @@ const BlogCard: React.FC<{ blog: Blog }> = ({ blog }) => {
               loading="lazy"
             />
           ) : (
+            // --- REFINED MINIMALIST PLACEHOLDER (Topic as Image) ---
             <div
-              className={`flex items-center justify-center w-full h-full bg-gradient-to-r ${topicGradient} text-white text-xl font-bold px-3 text-center break-words select-none overflow-hidden`}
-              aria-label={blog.title}
+              className={`relative flex flex-col items-center justify-center w-full h-full p-4 bg-gray-900 border-4 border-gray-700 overflow-hidden select-none`}
+              aria-label={`Placeholder for topic: ${blog.topic}`}
             >
-              {blog.title}
+              {/* Subtle background gradient overlay for minimalist effect */}
+              <div 
+                  className={`absolute inset-0 opacity-20 bg-gradient-to-br ${topicGradient}`}
+              ></div>
+              
+              {/* Icon / Simple shape for visual interest */}
+              <svg 
+                  className="w-10 h-10 text-white z-10 mb-2 opacity-80" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  viewBox="0 0 24 24"
+              >
+                  {/* Using a simple 'code' or 'database' like icon for tech topics */}
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+              </svg>
+              
+              {/* Focused Text (Topic) */}
+              <p
+                  className="z-10 text-white text-2xl font-extrabold px-3 text-center break-words"
+                  style={{ textShadow: '0 0 0.25rem rgba(0, 0, 0, 0.5)' }} 
+              >
+                  {blog.topic}
+              </p>
             </div>
           )}
         </div>
@@ -91,7 +129,11 @@ const BlogCard: React.FC<{ blog: Blog }> = ({ blog }) => {
 
       {/* Title & posting date */}
       <div className="flex-shrink-0">
-        <h3 className="text-white font-semibold text-lg md:text-xl mb-1 break-words">{blog.title}</h3>
+        <h3 
+            className={`font-semibold text-lg md:text-xl mb-1 break-words ${isPlaceholder ? 'text-gray-400' : 'text-white'}`}
+        >
+          {blog.title}
+        </h3>
         <div className="flex items-center text-gray-400 text-xs space-x-1 mb-3 select-none">
           {/* Calendar icon */}
           <svg
