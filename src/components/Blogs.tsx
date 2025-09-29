@@ -1,53 +1,39 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import BlogCard from "./cards/BlogCard";
-import type { Blog } from "../types/Blog";
-
-const sampleBlogs: Blog[] = [
-  {
-    id: "1",
-    topic: "Database Sharding",
-    readTime: "8 min read",
-    title: "Understanding Database Sharding",
-    postingDate: "2024-09-01T12:00:00Z",
-    description:
-      "Database sharding is a method for distributing data across multiple machines to improve scalability and performance. In this article, we explore different sharding strategies...",
-    tags: ["database", "scaling", "sharding"],
-  },
-  {
-    id: "2",
-    topic: "System Design",
-    readTime: "10 min read",
-    title: "Building Scalable Systems",
-    postingDate: "2024-08-20T08:30:00Z",
-    description:
-      "Scalability is key to handling increasing loads. This blog covers important concepts such as load balancing, caching, and horizontal scaling techniques.",
-    tags: ["system design", "scalability", "architecture"],
-  },
-  {
-    id: "3",
-    topic: "DSA",
-    readTime: "5 min read",
-    title: "Mastering Data Structures",
-    postingDate: "2024-07-15T15:45:00Z",
-    description:
-      "Data structures are fundamental to computer science. Learn about arrays, linked lists, trees, graphs, and how to use them effectively.",
-    tags: ["dsa", "algorithms", "programming"],
-  },
-  {
-    id: "4",
-    topic: "Tech Trends",
-    readTime: "7 min read",
-    title: "Latest Trends in Technology",
-    postingDate: "2024-09-10T10:00:00Z",
-    description:
-      "Technology evolves rapidly. Stay updated on the newest trends like AI advancements, blockchain, and cloud computing that are shaping the future.",
-    tags: ["technology", "AI", "blockchain"],
-  },
-];
+import { sampleBlogs } from "../data/data.ts";
 
 const Blogs: React.FC = () => {
   const navigate = useNavigate();
+  // 0: Initial 3 cards shown. "View More" text: "View More"
+  // 1: Next 3 cards shown (6 total). "View More" text: "View More"
+  // 2: Next 3 cards shown (9 total). "View More" text: "View All Blogs"
+  // 3: Redirect to /allBlogs
+  const [viewMoreCount, setViewMoreCount] = useState(0);
+
+  // constants for pagination logic
+  const CARDS_PER_ROW = 3;
+  const MAX_VIEW_MORE_CLICKS = 2;
+
+  // Calculate the total number of cards to display based on the count
+  const totalVisibleCards = CARDS_PER_ROW * (viewMoreCount + 1);
+  
+  // Slice the blogs array to get only the ones needed for the current view
+  const visibleBlogs = sampleBlogs.slice(0, totalVisibleCards);
+
+  let buttonText = "View More";
+  let buttonAction = () => setViewMoreCount((prev) => prev + 1);
+  
+  if (viewMoreCount === MAX_VIEW_MORE_CLICKS) {
+    buttonText = "View All Blogs";
+    buttonAction = () => navigate("/allBlogs");
+  }
+  
+  if (visibleBlogs.length < totalVisibleCards && viewMoreCount < MAX_VIEW_MORE_CLICKS) {
+      buttonText = "View All Blogs ->";
+      buttonAction = () => navigate("/allBlogs");
+  }
+
 
   return (
     <section
@@ -57,6 +43,7 @@ const Blogs: React.FC = () => {
         min-h-screen
       "
     >
+      {/* Header Section (Unchanged) */}
       <div className="text-center mb-8">
         <h2 className="text-3xl font-extrabold text-cyan-400">
           Latest Blog Posts
@@ -67,7 +54,7 @@ const Blogs: React.FC = () => {
         <button
           type="button"
           className="mt-4 inline-flex items-center rounded border border-cyan-500 bg-transparent px-4 py-2 text-cyan-400 hover:bg-cyan-500 hover:text-black transition-colors"
-          onClick={() => navigate("/blogs")}
+          onClick={() => navigate("/allBlogs")}
         >
           View All Blogs
           <svg
@@ -84,27 +71,51 @@ const Blogs: React.FC = () => {
         </button>
       </div>
 
+      {/* Dynamic Grid Container */}
       <div
-        className="flex gap-6 overflow-x-auto scrollbar-hide px-2"
-        aria-label="Scrollable list of blog posts"
-        style={{ scrollSnapType: "x mandatory" }}
+        className="
+          grid 
+          grid-cols-1 md:grid-cols-2 lg:grid-cols-3 
+          gap-8 
+          max-w-screen-xl mx-auto 
+          pb-8
+        "
+        aria-label="Grid of blog posts"
       >
-        {sampleBlogs.length === 0 ? (
-          <p className="text-gray-500 text-center w-full">
-            No blogs available.
+        {visibleBlogs.length === 0 ? (
+          <p className="text-gray-500 text-center col-span-full">
+            No recent blogs available.
           </p>
         ) : (
-          sampleBlogs.map((blog) => (
+          visibleBlogs.map((blog) => (
             <div
               key={blog.id}
-              className="scroll-snap-start flex-shrink-0"
-              style={{ minWidth: "280px" }}
+              // The BlogCard component should handle its own min/max width internally
+              // based on the grid cell it occupies.
             >
               <BlogCard blog={blog} />
             </div>
           ))
         )}
       </div>
+      
+      {sampleBlogs.length > visibleBlogs.length || viewMoreCount < MAX_VIEW_MORE_CLICKS ? (
+        <div className="text-center mt-6">
+          <button
+            type="button"
+            className={`
+              inline-flex items-center rounded-full border px-6 py-3 font-semibold 
+              ${viewMoreCount === MAX_VIEW_MORE_CLICKS 
+                ? 'border-cyan-500 bg-transparent text-cyan-400 hover:bg-cyan-500 hover:text-black' 
+                : 'border-gray-500 bg-gray-700 text-gray-200 hover:bg-gray-600'}
+              transition-colors duration-200
+            `}
+            onClick={buttonAction}
+          >
+            {buttonText}
+          </button>
+        </div>
+      ) : null}
     </section>
   );
 };

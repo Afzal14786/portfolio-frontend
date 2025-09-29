@@ -27,8 +27,9 @@ const BlogCard: React.FC<{ blog: Blog }> = ({ blog }) => {
     navigate(`/blog/${blog.id}`);
   };
 
+  // Keep a maximum of 250 characters and ensure the slice doesn't cut in the middle of a word unnecessarily.
   const descriptionPreview =
-    blog.description.length > 250 ? blog.description.slice(0, 250) + '...more' : blog.description;
+    blog.description.length > 250 ? blog.description.slice(0, 250).trim() + '...more' : blog.description;
 
   const topicGradient = getRandomGradient(blog.topic);
 
@@ -39,7 +40,7 @@ const BlogCard: React.FC<{ blog: Blog }> = ({ blog }) => {
       tabIndex={0}
       onKeyDown={(e) => e.key === 'Enter' && handleClick()}
       className="flex flex-col cursor-pointer rounded-lg border border-gray-700 bg-gradient-to-br from-[#0d1117] to-[#161b22] p-5 shadow-lg
-      min-w-[280px] max-w-[320px] md:max-w-[360px] h-[440px] hover:shadow-cyan-500/50 transition-shadow duration-300
+      min-w-[280px] w-full max-w-[400px] min-h-[400px] hover:shadow-cyan-500/50 transition-shadow duration-300 mx-auto
       focus:outline-none focus:ring-2 focus:ring-cyan-500"
     >
       {/* Header: topic badge and read time */}
@@ -68,18 +69,18 @@ const BlogCard: React.FC<{ blog: Blog }> = ({ blog }) => {
       </header>
 
       {/* Centered Image or Title placeholder */}
-      <div className="flex-grow flex items-center justify-center mb-4">
+      <div className="flex-grow-0 flex items-center justify-center mb-4">
         <div className="h-36 w-full rounded-md overflow-hidden flex items-center justify-center bg-gray-800">
           {blog.imageUrl ? (
             <img
               src={blog.imageUrl}
               alt={blog.title}
-              className="object-contain w-full h-full"
+              className="object-cover w-full h-full"
               loading="lazy"
             />
           ) : (
             <div
-              className={`flex items-center justify-center w-full h-full bg-gradient-to-r ${topicGradient} text-white text-xl font-bold px-3 text-center break-words select-none`}
+              className={`flex items-center justify-center w-full h-full bg-gradient-to-r ${topicGradient} text-white text-xl font-bold px-3 text-center break-words select-none overflow-hidden`}
               aria-label={blog.title}
             >
               {blog.title}
@@ -89,7 +90,7 @@ const BlogCard: React.FC<{ blog: Blog }> = ({ blog }) => {
       </div>
 
       {/* Title & posting date */}
-      <div>
+      <div className="flex-shrink-0">
         <h3 className="text-white font-semibold text-lg md:text-xl mb-1 break-words">{blog.title}</h3>
         <div className="flex items-center text-gray-400 text-xs space-x-1 mb-3 select-none">
           {/* Calendar icon */}
@@ -117,17 +118,16 @@ const BlogCard: React.FC<{ blog: Blog }> = ({ blog }) => {
         </div>
       </div>
 
-      {/* Description & Tags container */}
-      <div className="flex flex-col">
-        {/* Description */}
-        <p className="text-gray-300 text-sm mb-4 overflow-hidden">{descriptionPreview}</p>
+      <div className="flex flex-col flex-grow">
+        <p className="text-gray-300 text-sm mb-4 overflow-hidden text-ellipsis">
+          {descriptionPreview}
+        </p>
 
-        {/* Tags */}
         <footer className="flex flex-wrap gap-2 mt-auto">
           {blog.tags?.map((tag) => (
             <span
               key={tag}
-              className="bg-gray-700 text-gray-300 text-xs px-3 py-1 rounded-md select-none"
+              className="bg-gray-700 text-gray-300 text-xs px-3 py-1 rounded-md select-none flex-shrink-0"
             >
               #{tag}
             </span>

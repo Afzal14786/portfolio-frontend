@@ -1,21 +1,17 @@
 import './App.css'
-import HomePage from "./Pages/HomePage"
-import Skills from "./Pages/Skills"
-import MyJourney from "./Pages/MyJourney"
-import ProjectPage from './Pages/ProjectPage'
-import BlogPage from './Pages/BlogPage'
-import ConnectPage from "./Pages/ConnectPage"
+import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
+import AllPages from "./Pages/AllPages";
 
 function App() {
 
   return (
     <>
-      <HomePage/>
-      <Skills/>
-      <MyJourney/>
-      <ProjectPage/>
-      <BlogPage/>
-      <ConnectPage/>
+      <Router>
+        <Routes>
+          <Route path="/" element={<AllPages/>}/>
+        </Routes>
+      </Router>
+      
     </>
   )
 }
