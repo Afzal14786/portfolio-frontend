@@ -1,11 +1,9 @@
 import React, { useState, useMemo } from "react";
 
-// --- TYPE IMPORTS ---
-import type { Certificate } from "../types/Certificate"; // Importing Certificate interface from separate file
+import type { Certificate } from "../types/Certificate.ts";
 
-// NOTE: We assume 'certificates' is successfully imported from the path below
-import { certificates } from "../data/data.ts"; // Data import (destructured as per your snippet)
-import CertificateCard from "../components/cards/CertificateCard.tsx"; // Imported Card component
+import { certificates } from "../data/data.ts";
+import CertificateCard from "../components/cards/CertificateCard.tsx";
 
 import banner from "../assets/banner.png";
 import profileImage from "../assets/profileImage.jpeg";
@@ -17,7 +15,6 @@ import twitter from "../assets/twitter.png";
 import leetcode from "../assets/leetcode.png";
 
 // --- TYPE DEFINITIONS ---
-// Removed redundant inline Certificate interface definition here
 
 interface SocialLink {
   id: string;
