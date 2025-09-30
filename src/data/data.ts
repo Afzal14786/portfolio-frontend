@@ -1,4 +1,5 @@
-import type { Blog } from "../types/Blog.js";
+import type { Blog } from "../types/Blog.ts";
+import type {Certificate} from "../types/Certificate.ts"
 
 export const sampleBlogs: Blog[] = [
   // --- DATABASE & DATA ENGINEERING (1-10) ---
@@ -506,7 +507,7 @@ export const sampleBlogs: Blog[] = [
     title: "Sorting Algorithms Demystified: Quicksort, Mergesort, and Heapsort",
     postingDate: "2024-10-01T12:00:00Z",
     description:
-      "Sorting is a core operation in computer science, and the choice of algorithm drastically impacts performance. This post provides a detailed analysis of the three most common $O(n \log n)$ comparison-based sorting algorithms. We break down the **Divide and Conquer** paradigm used by **Quicksort** and **Mergesort**, highlighting Quicksort's in-place efficiency and Mergesort's guaranteed worst-case performance. We also explore **Heapsort**, which uses the Heap data structure to sort elements. The article includes a complexity analysis (worst-case, average-case, space) for each, enabling you to select the best algorithm for your specific data size and constraints.",
+      "Sorting is a core operation in computer science, and the choice of algorithm drastically impacts performance. This post provides a detailed analysis of the three most common $O(n \\log n)$ comparison-based sorting algorithms. We break down the **Divide and Conquer** paradigm used by **Quicksort** and **Mergesort**, highlighting Quicksort's in-place efficiency and Mergesort's guaranteed worst-case performance. We also explore **Heapsort**, which uses the Heap data structure to sort elements. The article includes a complexity analysis (worst-case, average-case, space) for each, enabling you to select the best algorithm for your specific data size and constraints.",
     tags: ["dsa", "algorithms", "programming", "performance"],
     imageUrl: "https://images.unsplash.com/photo-1526498460520-4c2463e2621d?q=80&w=1200",
   },
@@ -606,4 +607,99 @@ export const sampleBlogs: Blog[] = [
     tags: ["cloud", "aws", "devops", "serverless", "ec2"],
     imageUrl: "https://images.unsplash.com/photo-1588665792487-12c8b093359d?q=80&w=1200",
   },
+];
+
+// Randome Fake Certificate Data 
+
+export const certificates: Certificate[] = [
+  {
+    id: "1",
+    course_name: "Full-Stack Web Development",
+    certificate_image_url: "https://picsum.photos/300/200?random=1",
+    skills: ["JavaScript", "React", "Node.js", "MongoDB"],
+    instructor_image_url: "https://randomuser.me/api/portraits/men/1.jpg",
+    institute_name: "Coursera",
+    teacher_name: "John Smith"
+  },
+  {
+    id: "2",
+    course_name: "Data Science with Python",
+    certificate_image_url: "https://picsum.photos/300/200?random=2",
+    skills: ["Python", "Pandas", "NumPy", "Machine Learning"],
+    instructor_image_url: "https://randomuser.me/api/portraits/women/2.jpg",
+    institute_name: "edX",
+    teacher_name: "Sarah Johnson"
+  },
+  {
+    id: "3",
+    course_name: "Cloud Computing Fundamentals",
+    certificate_image_url: "https://picsum.photos/300/200?random=3",
+    skills: ["AWS", "Azure", "GCP", "Docker"],
+    instructor_image_url: "https://randomuser.me/api/portraits/men/3.jpg",
+    institute_name: "Udacity",
+    teacher_name: "Michael Brown"
+  },
+  {
+    id: "4",
+    course_name: "Artificial Intelligence Basics",
+    certificate_image_url: "https://picsum.photos/300/200?random=4",
+    skills: ["AI", "Neural Networks", "Deep Learning"],
+    instructor_image_url: "https://randomuser.me/api/portraits/women/4.jpg",
+    institute_name: "MITx",
+    teacher_name: "Emily Davis"
+  },
+  {
+    id: "5",
+    course_name: "Blockchain and Cryptocurrency",
+    certificate_image_url: "https://picsum.photos/300/200?random=5",
+    skills: ["Blockchain", "Ethereum", "Smart Contracts"],
+    instructor_image_url: "https://randomuser.me/api/portraits/men/5.jpg",
+    institute_name: "Stanford Online",
+    teacher_name: "Robert Wilson"
+  },
+  {
+    id: "6",
+    course_name: "UI/UX Design Principles",
+    certificate_image_url: "https://picsum.photos/300/200?random=6",
+    skills: ["Figma", "Wireframing", "Prototyping"],
+    instructor_image_url: "https://randomuser.me/api/portraits/women/6.jpg",
+    institute_name: "DesignLab",
+    teacher_name: "Sophia Martinez"
+  },
+  {
+    id: "7",
+    course_name: "Cybersecurity Essentials",
+    certificate_image_url: "https://picsum.photos/300/200?random=7",
+    skills: ["Networking", "Ethical Hacking", "Encryption"],
+    instructor_image_url: "https://randomuser.me/api/portraits/men/7.jpg",
+    institute_name: "Cybrary",
+    teacher_name: "David Lee"
+  },
+  {
+    id: "8",
+    course_name: "Mobile App Development with Flutter",
+    certificate_image_url: "https://picsum.photos/300/200?random=8",
+    skills: ["Flutter", "Dart", "Firebase"],
+    instructor_image_url: "https://randomuser.me/api/portraits/women/8.jpg",
+    institute_name: "Udemy",
+    teacher_name: "Olivia Taylor"
+  },
+  {
+    id: "9",
+    course_name: "Big Data Analytics",
+    certificate_image_url: "https://picsum.photos/300/200?random=9",
+    skills: ["Hadoop", "Spark", "Data Mining"],
+    instructor_image_url: "https://randomuser.me/api/portraits/men/9.jpg",
+    institute_name: "Simplilearn",
+    teacher_name: "James Anderson"
+  },
+  {
+    id: "10",
+    course_name: "DevOps and CI/CD",
+    certificate_image_url: "https://picsum.photos/300/200?random=10",
+    skills: ["CI/CD", "Kubernetes", "Jenkins", "GitHub Actions"],
+    instructor_image_url: "https://randomuser.me/api/portraits/women/10.jpg",
+    institute_name: "Pluralsight",
+    teacher_name: "Ava Thompson"
+  }
 ];

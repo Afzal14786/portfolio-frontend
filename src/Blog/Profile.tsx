@@ -1,3 +1,12 @@
+import React, { useState, useMemo } from "react";
+
+// --- TYPE IMPORTS ---
+import type { Certificate } from "../types/Certificate"; // Importing Certificate interface from separate file
+
+// NOTE: We assume 'certificates' is successfully imported from the path below
+import { certificates } from "../data/data.ts"; // Data import (destructured as per your snippet)
+import CertificateCard from "../components/cards/CertificateCard.tsx"; // Imported Card component
+
 import banner from "../assets/banner.png";
 import profileImage from "../assets/profileImage.jpeg";
 import facebook from "../assets/facebook.png";
@@ -7,7 +16,9 @@ import instagram from "../assets/instagram.png";
 import twitter from "../assets/twitter.png";
 import leetcode from "../assets/leetcode.png";
 
-// TYPE DEFINITIONS ---
+// --- TYPE DEFINITIONS ---
+// Removed redundant inline Certificate interface definition here
+
 interface SocialLink {
   id: string;
   name: string;
@@ -39,6 +50,10 @@ interface MockData {
 const ACCENT_TEXT_COLOR = "text-cyan-400";
 const ACCENT_BG_COLOR = "bg-cyan-600/30";
 const BUTTON_COLOR = "bg-cyan-600 hover:bg-cyan-700";
+const CARD_BG = "bg-gray-800"; 
+
+// Configuration for certificate display
+const CARDS_PER_CLICK = 3;
 
 // --- NEW CODE-QUOTE FOR DISPLAY ---
 const CODE_PHILOSOPHY_SNIPPET = `
@@ -102,7 +117,7 @@ const MOCK_DATA: MockData = {
 
 const USER_NAME = "Md Afzal Ansari";
 
-// Social Media Icon - FIX: Explicitly define the type of the 'link' prop
+// Social Media Icon
 const SocialIcon = ({ link }: { link: SocialLink }) => (
   <a href={link.url} target="_blank" rel="noopener noreferrer" className="relative group">
     <img
@@ -117,6 +132,32 @@ const SocialIcon = ({ link }: { link: SocialLink }) => (
 const Profile = () => {
   const { BLOGS_COUNT, READING_RESOURCES, SOCIAL_LINKS, HOBBIES } = MOCK_DATA;
   const resourcesToDisplay = READING_RESOURCES.slice(0, 10);
+  
+  // --- START CERTIFICATE LOGIC ---
+  // 1. Use the imported 'certificates' data array
+  const allCertificates = certificates as Certificate[]; 
+  
+  // 2. State for controlling the number of visible certificates
+  const [visibleCount, setVisibleCount] = useState(CARDS_PER_CLICK);
+  const totalCertificates = allCertificates.length;
+  const showViewMoreButton = visibleCount < totalCertificates;
+
+  // 3. Function to load the next set of cards
+  const loadMore = () => {
+    // If the next click would show more than (current + 3), set it to show all remaining
+    const nextCount = visibleCount + CARDS_PER_CLICK;
+    if (nextCount > totalCertificates) {
+        setVisibleCount(totalCertificates); 
+    } else {
+        setVisibleCount(nextCount);
+    }
+  };
+
+  // 4. Memoized array of certificates to display
+  const certificatesToDisplay = useMemo(() => {
+    return allCertificates.slice(0, visibleCount);
+  }, [allCertificates, visibleCount]);
+  // --- END CERTIFICATE LOGIC ---
 
   return (
     <div className="min-h-screen bg-gray-900 text-white font-sans">
@@ -250,7 +291,7 @@ const Profile = () => {
 
         {/* Row 2: Blogs + Hobbies (2-column layout) */}
         {/* REWORKED LAYOUT: Blogs (col-1) | Hobbies (col-2) */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
           
           {/* 1. Blogs Count (col-span-1) */}
           <div className="col-span-1 p-6 bg-gray-800 rounded-xl shadow-lg border border-gray-700 flex flex-col justify-center items-center text-center">
@@ -297,6 +338,40 @@ const Profile = () => {
             </div>
           </div>
         </div>
+              {/* certificate section */}
+        {/* Only render the section if there are certificates */}
+        {totalCertificates > 0 && (
+            <div className={`p-6 ${CARD_BG} rounded-xl shadow-2xl border border-gray-700 mt-6`}>
+                <h2 className={`text-3xl font-extrabold text-center mb-8 ${ACCENT_TEXT_COLOR}`}>
+                    My Certificates
+                </h2>
+                
+                {/* Certificate Grid: Responsive layout (3 columns on lg, 2 on sm, 1 on mobile) */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {certificatesToDisplay.map((cert) => (
+                        // Key fix applied, using 'id'
+                        <CertificateCard key={cert.id} {...cert} />
+                    ))}
+                </div>
+
+                {/* View More Button */}
+                {showViewMoreButton && (
+                    <div className="flex justify-center mt-10">
+                        <button
+                            onClick={loadMore}
+                            className={`px-8 py-3 text-lg font-bold rounded-full ${BUTTON_COLOR} text-white shadow-xl transition duration-300 transform hover:scale-[1.05]`}
+                        >
+                            {/* Dynamic button text for the last click */}
+                            {certificatesToDisplay.length === CARDS_PER_CLICK ? 
+                                "View Next" : 
+                                `View All (${totalCertificates - visibleCount} Remaining)`
+                            }
+                        </button>
+                    </div>
+                )}
+            </div>
+        )}
+
       </div>
     </div>
   );
