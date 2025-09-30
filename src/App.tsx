@@ -4,6 +4,7 @@ import AllPages from "./Pages/AllPages";
 import AllBlogs from "./Blog/AllBlogs";
 import ReadBlog from "./Blog/ReadBlog";
 import { ToastContainer } from 'react-toastify';
+import Profile from "./Blog/Profile"
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
           <Route path="/" element={<AllPages />} />
           <Route path="/allBlogs" element={<AllBlogs />} />
           <Route path="/blog/:subjectSlug/:titleSlug/:blogId" element={<ReadBlog />}/>
+          <Route path="/me" element={<Profile />} />
         </Routes>
       </Router>
       <ToastContainer/>

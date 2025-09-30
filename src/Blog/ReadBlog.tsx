@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import type { MouseEvent, ReactElement } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { sampleBlogs } from "../data/data.ts";
 import type { Blog } from "../types/Blog";
 import profileImage from "../assets/profileImage.jpeg"; 
-// import { toast } from 'react-toastify'; // Not needed anymore
-
-// Share image imports are removed
 
 // --- TYPE DEFINITIONS ---
 
@@ -24,7 +22,6 @@ interface ActionButtonProps {
     buttonClassName?: string;
 }
 
-// SharePopoverProps and ShareOption interface are removed
 
 // --- CONSTANTS & UTILITIES ---
 
@@ -75,10 +72,6 @@ const ReadBlog: React.FC = () => {
   const [blog, setBlog] = useState<FullBlog | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-
-  // Share popover states are removed
-  // const [showSharePopoverDesktop, setShowSharePopoverDesktop] = useState(false);
-  // const [showSharePopoverMobile, setShowSharePopoverMobile] = useState(false);
   
   const [likes, setLikes] = useState(0); 
   const [isLiked, setIsLiked] = useState(false);
@@ -112,11 +105,6 @@ const ReadBlog: React.FC = () => {
     setIsLiked(prev => !prev);
     setLikes(prev => prev + (isLiked ? -1 : 1));
   };
-
-  // Share click handlers and close handlers are removed
-  // const handleShareClick = (isMobile: boolean) => (e: MouseEvent<HTMLButtonElement>) => { /* ... */ };
-  // const handleClosePopoverDesktop = () => setShowSharePopoverDesktop(false);
-  // const handleClosePopoverMobile = () => setShowSharePopoverMobile(false);
 
   // --- RENDERING SETUP ---
 
@@ -198,16 +186,16 @@ const ReadBlog: React.FC = () => {
         {/* Author and Metadata Row */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-gray-700 pb-4 mb-8 space-y-4 sm:space-y-0">
           
-          {/* Author/Writer Name */}
-          <div className="flex items-center space-x-3">
+          {/* Author/Writer Name - FIX APPLIED HERE */}
+          <Link to={'/me'} className="flex items-center space-x-3 group"> {/* Changed wrapper div to Link and added group class for hover effect */}
             <img 
                 className="w-10 h-10 rounded-full object-cover border border-cyan-400" 
                 src={profileImage} 
                 alt={AUTHOR_NAME}
             />
-            <p className="text-sm font-semibold text-gray-400">{AUTHOR_NAME}</p>
-          </div>
-          
+            <p className="text-sm font-semibold text-gray-400 group-hover:text-cyan-400 transition-colors">{AUTHOR_NAME}</p>
+          </Link>
+
           {/* Date and Read Time */}
           <div className="text-sm text-gray-500 flex flex-wrap gap-x-4 gap-y-1">
             <div className="flex items-center">

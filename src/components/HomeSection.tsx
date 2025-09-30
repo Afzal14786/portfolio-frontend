@@ -1,3 +1,5 @@
+import { useNavigate } from "react-router-dom";
+
 import github from "/src/assets/github-2.png";
 import instagram from "/src/assets/instagram.png";
 import twitter from "/src/assets/twitter.png";
@@ -8,6 +10,7 @@ import project from "/src/assets/project.png";
 import blog from "/src/assets/blog.png";
 
 const HomeSection = () => {
+  const navigate = useNavigate();
   return (
     <section className="w-full min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-black to-gray-800 px-4 text-white">
       <div className="flex flex-col md:flex-row items-center justify-between w-full max-w-6xl md:gap-12">
@@ -35,7 +38,7 @@ const HomeSection = () => {
               View Projects
             </a>
             
-            <button className="flex items-center gap-2 border border-cyan-400 text-cyan-400 px-5 py-2 rounded-lg hover:bg-cyan-600 hover:text-white transition shadow shadow-cyan-500/20">
+            <button className="flex items-center gap-2 border border-cyan-400 text-cyan-400 px-5 py-2 rounded-lg hover:bg-cyan-600 hover:text-white transition shadow shadow-cyan-500/20" onClick={()=> navigate("/allBlogs")}>
               <img src={blog} alt="Blog" className="w-5 h-5" />
               My Blog Page
             </button>

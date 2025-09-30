@@ -22,7 +22,8 @@ This is the official personal website for Afzal **(me)**, a tech enthusiast and 
 ![Latest Blogs](./docs/latestBlogs.png)
 ![All Blogs](./docs/allBlogs.png)
 ![Read Blog 1](./docs/readBlog1.png)
-![Read Blog 2](./docs/readBlog2.png)  
+![Read Blog 2](./docs/readBlog2.png)
+![My Profile](./docs/me.png)  
 
 ---
 

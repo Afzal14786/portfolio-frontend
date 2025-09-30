@@ -75,11 +75,11 @@ const AllBlogs: React.FC = () => {
                 <div className="max-w-7xl mx-auto px-4 sm:px-8">
                     <div className="flex items-center space-x-4 -mt-12 sm:-mt-16">
                         <img 
-                            className="w-20 h-20 sm:w-28 sm:h-28 rounded-full border-4 border-white shadow-lg bg-white"
+                            className="w-35 h-35 sm:w-45 sm:h-45 rounded-full border-4 border-white shadow-lg bg-white"
                             src={profileImage}
                             alt="User Avatar"
                         />
-                        <p className="text-xl sm:text-2xl font-semibold text-white">{USER_NAME}</p>
+                        <p className="text-2xl sm:text-3xl font-semibold" style={{color: ACCENT_COLOR_TEXT}}>{USER_NAME}</p>
                     </div>
                 </div>
             </div>
