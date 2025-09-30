@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import BlogCard from '../components/cards/BlogCard.tsx';
 import { sampleBlogs } from "../data/data.ts";
 import type { Blog } from "../types/Blog.ts";
@@ -14,7 +14,7 @@ const ACCENT_COLOR_TEXT = "#64FFDA";
 const CARDS_PER_ROW = 3;
 
 const BlogGroup: React.FC<{ subject: string, blogs: Blog[] }> = ({ subject, blogs }) => {
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
     const [showAll, setShowAll] = useState(false);
     const visibleBlogs = showAll ? blogs : blogs.slice(0, CARDS_PER_ROW);
     const hasMoreBlogs = blogs.length > CARDS_PER_ROW;

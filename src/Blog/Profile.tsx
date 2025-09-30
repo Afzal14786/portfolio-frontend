@@ -83,12 +83,12 @@ const MOCK_DATA: MockData = {
     { id: 8, title: "Aesthetic Design", url: "https://dribbble.com/" },
   ],
   SOCIAL_LINKS: [
-    { id: "github", name: "GitHub", url: "https://github.com/mdafzalansari", icon: github as string },
-    { id: "linkedin", name: "LinkedIn", url: "https://linkedin.com/in/mdafzalansari", icon: linkedin as string },
-    { id: "facebook", name: "Facebook", url: "https://facebook.com/mdafzalansari", icon: facebook as string },
-    { id: "twitter", name: "Twitter", url: "https://twitter.com/mdafzalansari", icon: twitter as string },
-    { id: "instagram", name: "Instagram", url: "https://instagram.com/mdafzalansari", icon: instagram as string },
-    { id: "leetcode", name: "LeetCode", url: "https://leetcode.com/mdafzalansari", icon: leetcode as string },
+    { id: "github", name: "GitHub", url: "https://github.com/afzal14786", icon: github as string },
+    { id: "linkedin", name: "LinkedIn", url: "https://linkedin.com/in/mdafzal14786", icon: linkedin as string },
+    { id: "facebook", name: "Facebook", url: "https://facebook.com/mdafzal14786", icon: facebook as string },
+    { id: "twitter", name: "Twitter", url: "https://twitter.com/mdafzal14786", icon: twitter as string },
+    { id: "instagram", name: "Instagram", url: "https://instagram.com/mdafzal14786", icon: instagram as string },
+    { id: "leetcode", name: "LeetCode", url: "https://leetcode.com/mdafzal14786", icon: leetcode as string },
   ],
   HOBBIES: [ // Mock Hobbies data
     { id: 1, name: "Making Tea" },
