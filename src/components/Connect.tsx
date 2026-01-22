@@ -12,8 +12,8 @@ import linkedin from "/src/assets/linkedin.png";
 // Social media links array using image paths
 const socialLinks = [
   { name: 'GitHub', image: github, href: 'https://github.com/afzal14786' },
-  { name: 'LinkedIn', image: linkedin, href: 'https://linkedin.com/in/yourprofile'},
-  { name: 'Leetcode', image: leetcode, href: 'https://leetcode.com/yourprofile' },
+  { name: 'LinkedIn', image: linkedin, href: 'https://linkedin.com/in/mdafzal14786'},
+  { name: 'Leetcode', image: leetcode, href: 'https://leetcode.com/ansari_afzal' },
   { name: 'Instagram', image: instagram, href: 'https://instagram.com/mdafzal14786'},
   { name: 'Twitter', image: twitter, href: 'https://twitter.com/mdafzal14786'},
   { name: 'Facebook', image: facebook, href: 'https://facebook.com/mdafzal14786'},
