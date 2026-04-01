@@ -1,5 +1,5 @@
 import React from "react";
-import type { Certificate } from "../../types/Certificate.ts";
+import type { Certificate } from "../../types/certificate.ts";
 
 const CertificateCard: React.FC<Certificate> = ({
   course_name,

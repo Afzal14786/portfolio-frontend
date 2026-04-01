@@ -1,6 +1,6 @@
 import React from 'react';
 import ProjectCard from './cards/ProjectCard';
-import type { ProjectEntry } from '../types/Project';
+import type { ProjectEntry } from '../types/project';
 
 const initialProjectData: ProjectEntry[] = [
   {

@@ -2,7 +2,7 @@ import React, { useMemo, useState } from 'react';
 // import { useNavigate } from 'react-router-dom';
 import BlogCard from '../components/cards/BlogCard.tsx';
 import { sampleBlogs } from "../data/data.ts";
-import type { Blog } from "../types/Blog.ts";
+import type { Blog } from "../types/blog.ts";
 import profileImage from "../assets/profileImage.jpeg"
 import banner from "../assets/banner.png";
 

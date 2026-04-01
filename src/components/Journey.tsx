@@ -1,6 +1,6 @@
 import React from 'react';
 import JourneyCard from './cards/JourneyCard';
-import type { JourneyEntry } from '../types/Journey';
+import type { JourneyEntry } from '../types/journey';
 
 // Mock Data 
 const initialJourneyData: JourneyEntry[] = [

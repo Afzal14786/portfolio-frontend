@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from "react";
 
-import type { Certificate } from "../types/Certificate.ts";
+import type { Certificate } from "../types/certificate.ts";
 
 import { certificates } from "../data/data.ts";
 import CertificateCard from "../components/cards/CertificateCard.tsx";

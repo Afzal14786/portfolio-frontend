@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import type { ProjectEntry } from '../../types/Project.ts';
+import type { ProjectEntry } from '../../types/project.ts';
 import githubIcon from "../../assets/github.png";
 import openLink from "../../assets/openLink.png";
 

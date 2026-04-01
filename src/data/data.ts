@@ -1,5 +1,5 @@
-import type { Blog } from "../types/Blog.ts";
-import type {Certificate} from "../types/Certificate.ts"
+import type { Blog } from "../types/blog.ts";
+import type {Certificate} from "../types/certificate.ts"
 
 export const sampleBlogs: Blog[] = [
   // --- DATABASE & DATA ENGINEERING (1-10) ---

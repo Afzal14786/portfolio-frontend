@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import type { JourneyEntry } from "../../types/Journey";
+import type { JourneyEntry } from "../../types/journey";
 import journey from "../../assets/journey-the-world.png";
 
 

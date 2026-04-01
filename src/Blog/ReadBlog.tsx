@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import type { MouseEvent, ReactElement } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { sampleBlogs } from "../data/data.ts";
-import type { Blog } from "../types/Blog";
+import type { Blog } from "../types/blog.ts";
 import profileImage from "../assets/profileImage.jpeg"; 
 
 // --- TYPE DEFINITIONS ---

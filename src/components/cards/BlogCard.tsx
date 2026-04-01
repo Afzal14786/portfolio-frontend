@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import type { Blog } from '../../types/Blog';
+import type { Blog } from '../../types/blog';
 
 const topicGradients = [
   'from-purple-500 to-indigo-600',
