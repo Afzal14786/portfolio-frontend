@@ -108,4 +108,4 @@ A standard card component utilizes the following Tailwind pattern:
 This creates a semi-transparent, blurred background with a crisp white border, allowing background elements to softly bleed through the interface.  
 
 --- 
-*This project is submitted as part of the MCA/BCA Final Year Project requirement.*
+*This project is submitted as part of the BCA Final Year Project requirement.*
