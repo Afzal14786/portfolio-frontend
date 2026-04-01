@@ -1,20 +1,12 @@
 import { api } from '../lib/api';
-import type { Certificate } from '../types/certificate';
-import type { ApiResponse } from '../types/common';
+import type { CertificateFetchResponse } from '../types/certificate';
 
 export const CertificateService = {
   /**
-   * Fetch all portfolio certificates
+   * Fetch all active certificates for the public portfolio
    */
-  getCertificates: async (): Promise<ApiResponse<Certificate[]>> => {
-    // Assuming standard public portfolio route mapping
-    return api.get('/portfolio/certificates'); 
-  },
-  
-  /**
-   * Fetch a specific certificate by ID
-   */
-  getCertificateById: async (id: string): Promise<ApiResponse<Certificate>> => {
-    return api.get(`/portfolio/certificates/${id}`);
+  getPublicCertificates: async (): Promise<CertificateFetchResponse> => {
+    // This matches the pattern of your other public routes like '/portfolio/skills'
+    return api.get('/portfolio/certificates');
   }
-};
+}

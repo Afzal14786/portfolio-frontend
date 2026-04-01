@@ -26,6 +26,8 @@ export interface UserProfile {
   name: string;
   user_name: string;
   email: string;
+  bio: string;
+  role?: string;
   profile_image?: CloudinaryMedia | string;
   banner_image?: CloudinaryMedia | string;
   resume?: CloudinaryMedia | string;
@@ -34,4 +36,5 @@ export interface UserProfile {
   reading_resources: ReadingResource[];
   quote: string;
   blog_count: number;
+  createdAt: string;
 }

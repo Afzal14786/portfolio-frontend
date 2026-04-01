@@ -1,24 +1,43 @@
-import "./App.css";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import AllPages from "./Pages/AllPages";
-import AllBlogs from "./Blog/AllBlogs";
-import ReadBlog from "./Blog/ReadBlog";
-import { ToastContainer } from 'react-toastify';
-import Profile from "./Blog/Profile"
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Header from './components/layout/Header';
+
+import HomeSection from './components/sections/HomeSection';
+import JourneySection from './components/sections/JourneySection';
+import TechnicalSection from './components/sections/TechnicalSection';
+import ProjectSection from './components/sections/ProjectSection';
+import BlogSection from './components/sections/BlogSection'; 
+import ContactSection from './components/sections/ContactSection';
+
+import AllBlogs from './Pages/AllBlogs';
+import ReadBlog from './Pages/ReadBlog';
+import ProfilePage from './Pages/ProfilePage';
 
 function App() {
   return (
-    <>
-      <Router>
+    <Router>
+      <div className="min-h-screen font-sans">
+        <Header />
+        
         <Routes>
-          <Route path="/" element={<AllPages />} />
+\          <Route path="/" element={
+            <main>
+              <HomeSection />
+              <JourneySection />
+              <TechnicalSection />
+              <ProjectSection />
+              <BlogSection /> 
+              <ContactSection /> 
+            </main>
+          } />
+          <Route path="/me" element={<ProfilePage />} />
+          {/* 2. The Hub Page */}
           <Route path="/allBlogs" element={<AllBlogs />} />
-          <Route path="/blog/:subjectSlug/:titleSlug/:blogId" element={<ReadBlog />}/>
-          <Route path="/me" element={<Profile />} />
+
+          {/* 3. The Reading Page (Dynamic Parameter :slug) */}
+          <Route path="/blog/:slug" element={<ReadBlog />} />
         </Routes>
-      </Router>
-      <ToastContainer/>
-    </>
+      </div>
+    </Router>
   );
 }
 

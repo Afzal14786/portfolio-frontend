@@ -1,34 +1,18 @@
 import { api } from '../lib/api';
-import type { Blog } from '../types/blog';
-import type { ApiResponse, PaginatedResponse } from '../types/common';
-
-export interface BlogFilters {
-  page?: number;
-  limit?: number;
-  topic?: string;
-  tag?: string;
-  search?: string;
-  sort?: 'newest' | 'popular' | 'trending';
-}
+import type { BlogFetchResponse, SingleBlogResponse } from '../types/blog';
 
 export const BlogService = {
   /**
-   * Fetch all published blogs with optional filtering and pagination
+   * Fetch all blogs marked as 'published' for the public portfolio
    */
-  getPublishedBlogs: async (filters?: BlogFilters): Promise<PaginatedResponse<Blog>> => {
-    const params = new URLSearchParams();
-    if (filters) {
-      Object.entries(filters).forEach(([key, value]) => {
-        if (value !== undefined) params.append(key, value.toString());
-      });
-    }
-    return api.get(`/blogs?${params.toString()}`);
+  getPublishedBlogs: async (): Promise<BlogFetchResponse> => {
+    return api.get('/blogs/published');
   },
 
   /**
-   * Fetch a single blog's details by its slug
+   * Fetch a single, full blog post by its URL slug
    */
-  getBlogBySlug: async (slug: string): Promise<ApiResponse<{ blog: Blog, relatedBlogs: Blog[] }>> => {
+  getBlogBySlug: async (slug: string): Promise<SingleBlogResponse> => {
     return api.get(`/blogs/${slug}`);
   }
 };

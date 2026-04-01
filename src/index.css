@@ -1,4 +1,24 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@layer base {
+  html {
+    scroll-behavior: smooth; 
+  }
+  
+  body {
+    @apply bg-[#F2F2F7] text-slate-900 min-h-screen selection:bg-blue-200;
+    
+    /* The very subtle abstract colorful fog behind the glass */
+    background-image: 
+      radial-gradient(at 10% 20%, hsla(28, 100%, 84%, 0.6) 0px, transparent 50%),
+      radial-gradient(at 80% 0%, hsla(189, 100%, 76%, 0.6) 0px, transparent 50%),
+      radial-gradient(at 0% 100%, hsla(355, 100%, 93%, 0.6) 0px, transparent 50%),
+      radial-gradient(at 80% 100%, hsla(240, 100%, 86%, 0.6) 0px, transparent 50%),
+      radial-gradient(at 50% 50%, hsla(340, 100%, 86%, 0.3) 0px, transparent 50%);
+    background-attachment: fixed;
+  }
+}
 
 /* Hides the scrollbar for Chrome, Safari, and Edge */
 .scrollbar-hide::-webkit-scrollbar {

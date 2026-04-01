@@ -42,6 +42,36 @@ This is the official personal website for Afzal **(me)**, a tech enthusiast and 
 | **Concepts** | Responsive Design, State Management (Context API), API Integration |
 
 
+## Folder Structure 
+```text
+src/
+├── api/                  # Axios instances and API services
+│   ├── axios.config.ts
+├── assets/               # Local images, SVG icons, and global CSS
+├── components/           # Reusable UI pieces
+│   ├── layout/           # Global wrappers
+│   │   ├── Header.tsx    # Sticking macOS Glassy Header
+│   │   └── Footer.tsx
+│   ├── sections/         # The 7 specific sections
+│   │   ├── HomeSection.tsx
+│   │   ├── JourneySection.tsx
+│   │   ├── SkillSection.tsx
+│   │   ├── ProjectSection.tsx
+│   │   ├── BlogPreviewSection.tsx
+│   │   └── ContactSection.tsx
+│   └── ui/               # Base components (Buttons, GlassCard wrapper)
+│       └── GlassCard.tsx # Reusable wrapper for the macOS foggy look
+├── pages/                # The actual route components
+│   ├── HomePage.tsx      # Imports the 6 sections above
+│   ├── ReadBlogPage.tsx
+│   ├── AllBlogsPage.tsx
+│   └── DeepProfilePage.tsx
+├── types/                # The TS interfaces defined above
+├── App.tsx               # Router configuration
+└── index.css             # Tailwind setup and macOS gradient backgrounds
+```
+
+
 ## ⚙️ Getting Started
 
 To get a local copy up and running, follow these simple steps.
